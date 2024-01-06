@@ -1,0 +1,6 @@
+gunicorn~=21.2.0
+Django~=5.0.1
+django-probes~=1.7.0
+django-environ~=0.11.2
+psycopg2-binary~=2.9.9
+argon2-cffi~=23.1.0
