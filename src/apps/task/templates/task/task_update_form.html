@@ -1,0 +1,28 @@
+{% extends 'tasktool/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Update task' %}{% endblock %}
+
+{% block content %}
+
+<main class="container">
+  <article>
+    <header><h1>{% trans 'Update task' %} {{ object.text }}</h1></header>
+    <form method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <nav>
+        <ul>
+          <li>
+            Cancel
+          </li>
+        </ul>
+        <ul>
+          <li><input type="submit" value="{% trans 'Save task' %}" role="button"></li>
+        </ul>
+      </nav>
+    </form>
+  </article>
+</main>
+
+{% endblock %}

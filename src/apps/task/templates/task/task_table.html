@@ -1,0 +1,23 @@
+{% load i18n %}
+
+{% for task in tasks %}
+<tr>
+  <td>{{ task.title }}</td>
+  <td>
+    {{ task.description }}
+  </td>
+  <td>
+    <button
+        class="secondary"
+        hx-delete="{% url 'task:delete' task.id %}"
+        hx-target="closest tr"
+        hx-swap="outerHTML swap:1s"
+        hx-confirm="{% trans 'Are you sure?' %}"
+    >
+      {% trans 'Delete' %}
+    </button>
+  </td>
+</tr>
+{% empty %}
+<tr><td colspan="3">{% trans 'No tasks' %}</td></tr>
+{% endfor %}

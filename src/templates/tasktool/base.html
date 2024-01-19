@@ -1,0 +1,60 @@
+{% load i18n static tasktool_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      {% block title %}{% endblock %} -
+      {% translate 'Task tool' %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/pico.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/core.css' %}" />
+    <script src="{% url 'javascript-catalog' %}"></script>
+  </head>
+
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <nav class="container-fluid" id="site-header">
+      <a href="/">
+        <ul>
+          <li><img src="{% static 'images/favicon.svg' %}" alt="Site icon"></li>
+          <li>
+            <strong>{% translate 'Task tool' %}</strong>
+          </li>
+        </ul>
+      </a>
+      <ul>
+        {% if user.is_authenticated %}
+          <li>
+            <a class="{% active request 'dashboard' %}" href="{% url 'base-dashboard' %}">
+              {% translate 'Dashboard' %}
+            </a>
+          </li>
+          <li>
+            <a class="{% active request 'task' %}" href="{% url 'task:list' %}">
+              {% translate 'Tasks' %}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+      <ul>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'account' %}">{{ user.username }}</a> - <a href="{% url 'logout' %}">{% translate 'Log out' %}</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">{% translate 'Log in' %}</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <section>
+      <section id="messages-container">
+        {% if messages %}
+          {% for message in messages %}
+            {% include 'tasktool/common/message.html' with message=message only %}
+          {% endfor %}
+        {% endif %}
+      </section>
+      {% block content %}{% endblock %}
+    </section>
+    <script type="text/javascript" src="{% static 'js/htmx.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
+  </body>
+</html>

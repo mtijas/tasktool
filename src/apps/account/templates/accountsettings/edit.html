@@ -1,0 +1,29 @@
+{% extends "tasktool/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% translate "Edit settings" %}{% endblock %}
+
+{% block content %}
+
+<main class="container">
+  <article>
+    <header><h1>{% translate "Edit settings" %}</h1></header>
+    <form action="{% url "accountsettingsedit" %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <nav>
+        <ul>
+          <li>
+            {% include "tasktool/snippets/cancel_link.html" %}
+          </li>
+        </ul>
+        <ul>
+          <li><input type="submit" value="{% trans "Save settings" %}" role="button"></li>
+        </ul>
+      </nav>
+    </form>
+  </article>
+</main>
+
+{% endblock %}

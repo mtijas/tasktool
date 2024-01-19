@@ -1,0 +1,36 @@
+{% extends 'tasktool/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Tasks' %}{% endblock %}
+
+{% block content %}
+
+<main class="container">
+  <article>
+    <header>
+      <nav>
+        <ul>
+          <li><h2>{% trans 'Tasks' %}</h2></li>
+        </ul>
+      </nav>
+    </header>
+    <table role="grid">
+      <thead>
+        <tr>
+          <th>{% trans "Title" %}</th>
+          <th>{% trans "Description" %}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tasks-table" hx-get="{% url 'task:get-table' %}"  hx-trigger="newTask from:body">
+        {% include 'task/task_table.html' %}
+      </tbody>
+    </table>
+    <div id="task-add">
+      {% include 'task/new_task_button.html' %}
+    </div>
+  </article>
+</main>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "tasktool/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% translate "Account info" %}{% endblock %}
+
+{% block content %}
+
+<main class="container">
+  <article>
+    <header>
+      <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    </header>
+    <section class="grid">
+      <div>
+        <ul>
+          <li><strong>{% translate "Accountname" %}:</strong> {{ user.username }}</li>
+          <li><strong>{% translate "Email" %}:</strong> {{ user.email }}</li>
+        </ul>
+        <p>
+          <a href="{% url "password_change" %}">
+            {% trans "Change password" %}
+          </a>
+        </p>
+        <h2>{% trans "Settings" %}</h2>
+        <ul>
+          <li><strong>{% trans "Language" %}</strong>:
+            {% get_language_info for accountsettings.selected_lang as lang %}
+            {{ lang.name_local }} ({{ lang.name }}, {{ lang.code }})
+          </li>
+        </ul>
+        <p>
+          <a href="{% url "accountsettingsedit" %}">{% translate "Edit settings" %} </a>
+        </p>
+      </div>
+      <div>
+        <details open>
+          <summary><strong>{% translate "All groups" %}</strong></summary>
+          <ul>
+            {% for group in user.groups.all %}
+              <li>{{ group.name }}</li>
+            {% empty %}
+              <li>{% translate "Account does not belong to any group" %}</li>
+            {% endfor %}
+          </ul>
+        </details>
+        <details>
+          <summary><strong>{% translate "All permissions" %}</strong></summary>
+          <ul>
+            {% for permission in user_permissions %}
+              <li>{{ permission }}</li>
+            {% endfor %}
+          </ul>
+        </details>
+      </div>
+    </section>
+  </article>
+  {% if perms.auth.view_accounts %}
+    <article>
+      <header>
+        <h1>{% translate "All accounts" %}</h1>
+      </header>
+      <table>
+        <thead>
+          <th>{% translate "Accountname" %}</th>
+          <th>{% translate "First name" %}</th>
+          <th>{% translate "Last name" %}</th>
+          <th>{% translate "Email" %}</th>
+        </thead>
+        {% for single_user in accounts_list %}
+          <tr>
+            <td>{{ single_user.username }}</td>
+            <td>{{ single_user.first_name }}</td>
+            <td>{{ single_user.last_name }}</td>
+            <td>{{ single_user.email }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+      {% if user.is_staff %}
+        <p>
+          {% translate "Modify accounts in " %}
+          <a href="/admin">{% translate "Django administration view" %}</a>.
+        </p>
+      {% endif %}
+    </article>
+  {% endif %}
+</main>
+
+{% endblock %}

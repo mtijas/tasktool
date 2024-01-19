@@ -1,0 +1,31 @@
+{% extends 'tasktool/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Delete task' %}{% endblock %}
+
+{% block content %}
+
+<main class="container">
+  <article>
+    <header><h1>{% trans 'Delete task' %}</h1></header>
+
+    {{ form.non_field_errors }}
+
+    <form method="post">{% csrf_token %}
+        <p>
+          {% blocktranslate %}
+          Are you sure you want to delete "{{ object }}"?
+          {% endblocktranslate %}
+        </p>
+        {{ form }}
+        <nav>
+          <ul>
+            <li><input type="submit" value="{% trans 'Confirm deletion' %}" role="button"></li>
+          </ul>
+        </nav>
+    </form>
+  </article>
+</main>
+
+{% endblock %}

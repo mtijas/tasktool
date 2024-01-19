@@ -1,0 +1,5 @@
+{% load i18n %}
+
+<button hx-trigger="click" hx-get="{% url 'task:add' %}" hx-target="#task-add" hx-swap="innerHTML">
+  {% trans 'New task' %}
+</button>
