@@ -1,0 +1,34 @@
+{% load i18n %}
+
+<dialog id="modal" open="true">
+  <article>
+    <a href="#close"
+      aria-label="Close"
+      class="close"
+      onClick="closeModal(event)">
+    </a>
+    <form id="task-edit-form">
+      {% csrf_token %}
+      {% for field in form %}
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+      {% endfor %}
+    </form>
+    <footer>
+      <a href="#cancel"
+        role="button"
+        class="secondary"
+        onClick="closeModal(event)"
+      >
+        {% trans 'Cancel' %}
+      </a>
+      <a href="#save"
+        role="button"
+        hx-post="{% url 'task:edit' task.id %}"
+        hx-include="#task-edit-form"
+      >
+        {% trans 'Save task' %}
+      </a>
+    </footer>
+  </article>
+</dialog>

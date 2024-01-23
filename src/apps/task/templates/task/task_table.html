@@ -7,15 +7,27 @@
     {{ task.description }}
   </td>
   <td>
-    <button
-        class="secondary"
-        hx-delete="{% url 'task:delete' task.id %}"
-        hx-target="closest tr"
-        hx-swap="outerHTML swap:1s"
-        hx-confirm="{% trans 'Are you sure?' %}"
+    <a
+      href="#"
+      role="button"
+      class="primary"
+      hx-get="{% url 'task:edit' task.id %}"
+      hx-swap="outerHTML"
+      hx-target="#modal"
+    >
+      {% trans 'Edit' %}
+    </a>
+    <a
+      href="#"
+      role="button"
+      class="secondary"
+      hx-delete="{% url 'task:delete' task.id %}"
+      hx-target="closest tr"
+      hx-swap="outerHTML swap:1s"
+      hx-confirm="{% trans 'Are you sure?' %}"
     >
       {% trans 'Delete' %}
-    </button>
+    </a>
   </td>
 </tr>
 {% empty %}

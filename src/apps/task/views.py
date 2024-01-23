@@ -3,12 +3,12 @@
 # from django.views.generic.edit import CreateView, DeleteView, UpdateView
 # from django.views.generic.list import ListView
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
 
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm, TaskEditForm
 
 
 def list_tasks(request):
@@ -37,10 +37,15 @@ def add_task(request):
 
     return response
 
-class TaskView(View):
+class TaskModifyView(View):
     def delete(self, request, task_id):
         Task.objects.filter(pk=task_id).delete()
         return HttpResponse(status=200)
+
+    def get(self, request, task_id):
+        task = get_object_or_404(Task, pk=task_id)
+        form = TaskEditForm(initial={'title': task.title, 'description': task.description})
+        return render(request, 'task/task_edit_form.html', {'form': form, 'task': task})
 
 # class TaskListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 #     model = Task
