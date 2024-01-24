@@ -2,6 +2,7 @@
 
 {% for task in tasks %}
 <tr>
+  <td>#{{ task.id }}</td>
   <td>{{ task.title }}</td>
   <td>
     {{ task.description }}
@@ -20,7 +21,7 @@
     <a
       href="#"
       role="button"
-      class="secondary"
+      class="secondary outline"
       hx-delete="{% url 'task:delete' task.id %}"
       hx-target="closest tr"
       hx-swap="outerHTML swap:1s"
