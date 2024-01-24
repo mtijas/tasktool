@@ -26,6 +26,8 @@
         role="button"
         hx-post="{% url 'task:edit' task.id %}"
         hx-include="#task-edit-form"
+        hx-swap="outerHTML"
+        hx-target="closest dialog"
       >
         {% trans 'Save task' %}
       </a>

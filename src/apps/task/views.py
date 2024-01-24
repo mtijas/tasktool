@@ -19,8 +19,12 @@ def get_table(request):
     tasks = Task.objects.order_by('-id')
     return render(request, 'task/task_table.html', {'tasks': tasks})
 
-def add_task(request):
-    if request.method == 'POST':
+class TaskCreateView(View):
+    def get(self, request):
+        form = TaskForm()
+        return render(request, 'task/task_form.html', {'form': form})
+
+    def post(self, request):
         form = TaskForm(request.POST)
         if form.is_valid():
             task = Task()
@@ -31,21 +35,30 @@ def add_task(request):
             response['HX-Trigger'] = 'newTask'
         else:
             response = render(request, 'task/task_form.html', {'form': form})
-    else:
-        form = TaskForm()
-        response = render(request, 'task/task_form.html', {'form': form})
-
-    return response
+        return response
 
 class TaskModifyView(View):
-    def delete(self, request, task_id):
-        Task.objects.filter(pk=task_id).delete()
-        return HttpResponse(status=200)
-
     def get(self, request, task_id):
         task = get_object_or_404(Task, pk=task_id)
         form = TaskEditForm(initial={'title': task.title, 'description': task.description})
         return render(request, 'task/task_edit_form.html', {'form': form, 'task': task})
+
+    def post(self, request, task_id):
+        task = get_object_or_404(Task, pk=task_id)
+        form = TaskEditForm(request.POST)
+        if form.is_valid():
+            task.title = form.cleaned_data['title']
+            task.description = form.cleaned_data['description']
+            task.save()
+            response = render(request, 'common/close_modal.html')
+            response['HX-Trigger'] = 'newTask'
+            return response
+        return render(request, 'task/task_edit_form.html', {'form': form, 'task': task})
+
+    def delete(self, request, task_id):
+        Task.objects.filter(pk=task_id).delete()
+        return HttpResponse(status=200)
+
 
 # class TaskListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 #     model = Task
