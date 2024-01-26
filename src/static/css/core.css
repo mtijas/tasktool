@@ -55,3 +55,14 @@ tr.htmx-swapping td {
   opacity: 0;
   transition: opacity 1s ease-out;
 }
+
+
+/* Tags */
+
+.tag {
+  border-radius: .5rem;
+  display: inline-block;
+  margin: .1rem .2rem .1rem 0;
+  padding: .2rem .4rem;
+  width: fit-content;
+}

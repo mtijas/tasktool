@@ -10,16 +10,16 @@
       </a>
       <p>
         <strong>
-          {% if task %}
-            {% trans 'Task #' %}{{ task.id }}
+          {% if tag %}
+            {% trans 'Edit tag' %}
           {% else %}
-            {% trans 'New task' %}
+            {% trans 'New tag' %}
           {% endif %}
         </strong>
       </p>
     </header>
 
-    <form id="task-edit-form">
+    <form id="tag-edit-form">
       {% csrf_token %}
       {% for field in form %}
         {{ field.errors }}
@@ -37,12 +37,12 @@
         </button>
         <button
           role="button"
-          hx-post="{% if task %}{% url 'task:edit' task.id %}{% else %}{% url 'task:add' %}{% endif %}"
-          hx-include="#task-edit-form"
+          hx-post="{% if tag %}{% url 'tag:edit' tag.id %}{% else %}{% url 'tag:add' %}{% endif %}"
+          hx-include="#tag-edit-form"
           hx-swap="outerHTML"
           hx-target="closest dialog"
         >
-          {% trans 'Save task' %}
+          {% trans 'Save tag' %}
         </button>
       </div>
     </footer>

@@ -34,6 +34,11 @@
               {% translate 'Tasks' %}
             </a>
           </li>
+          <li>
+            <a class="{% active request 'tag' %}" href="{% url 'tag:list' %}">
+              {% translate 'Tags' %}
+            </a>
+          </li>
         {% endif %}
       </ul>
       <ul>
