@@ -1,0 +1,36 @@
+{% load i18n %}
+
+{% for task in tasks %}
+<tr>
+  <td>#{{ task.id }}</td>
+  <td>{{ task.title }}</td>
+  <td>
+    {{ task.description }}
+  </td>
+  <td>
+    <a
+      href="#"
+      role="button"
+      class="primary"
+      hx-get="{% url 'task:edit' task.id %}"
+      hx-swap="outerHTML"
+      hx-target="#modal"
+    >
+      {% trans 'Quick edit' %}
+    </a>
+    <a
+      href="#"
+      role="button"
+      class="secondary outline"
+      hx-delete="{% url 'task:delete' task.id %}"
+      hx-target="closest tr"
+      hx-swap="outerHTML swap:1s"
+      hx-confirm="{% trans 'Are you sure?' %}"
+    >
+      {% trans 'Delete' %}
+    </a>
+  </td>
+</tr>
+{% empty %}
+<tr><td colspan="3">{% trans 'No tasks' %}</td></tr>
+{% endfor %}

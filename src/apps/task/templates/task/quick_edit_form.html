@@ -2,11 +2,23 @@
 
 <dialog id="modal" open="true">
   <article>
-    <a href="#close"
-      aria-label="Close"
-      class="close"
-      onClick="closeModal(event)">
-    </a>
+    <header>
+      <a href="#close"
+        aria-label="Close"
+        class="close"
+        onClick="closeModal(event)">
+      </a>
+      <p>
+        <strong>
+          {% if task %}
+            {% trans 'Task #' %}{{ task.id }}
+          {% else %}
+            {% trans 'New task' %}
+          {% endif %}
+        </strong>
+      </p>
+    </header>
+
     <form id="task-edit-form">
       {% csrf_token %}
       {% for field in form %}
@@ -24,7 +36,7 @@
       </a>
       <a href="#save"
         role="button"
-        hx-post="{% url 'task:edit' task.id %}"
+        hx-post="{% if task %}{% url 'task:edit' task.id %}{% else %}{% url 'task:add' %}{% endif %}"
         hx-include="#task-edit-form"
         hx-swap="outerHTML"
         hx-target="closest dialog"

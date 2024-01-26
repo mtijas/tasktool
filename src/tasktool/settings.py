@@ -106,7 +106,6 @@ MIDDLEWARE = [
     'tasktool.middleware.common.LanguageSelectionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'tasktool.middleware.common.CancelLinkMiddleware',
 ]
 
 ROOT_URLCONF = 'tasktool.urls'
