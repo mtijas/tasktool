@@ -1,0 +1,33 @@
+{% load i18n %}
+
+{% for theme in themes %}
+<tr>
+  <td>{{ theme.title }}</td>
+  <td>{{ theme.description }}</td>
+  <td>
+    <a
+      href="#"
+      role="button"
+      class="primary"
+      hx-get="{% url 'agile:theme:edit' theme.id %}"
+      hx-swap="outerHTML"
+      hx-target="#modal"
+    >
+      {% trans 'Quick edit' %}
+    </a>
+    <a
+      href="#"
+      role="button"
+      class="secondary outline"
+      hx-delete="{% url 'agile:theme:delete' theme.id %}"
+      hx-target="closest tr"
+      hx-swap="outerHTML swap:1s"
+      hx-confirm="{% trans 'Are you sure?' %}"
+    >
+      {% trans 'Delete' %}
+    </a>
+  </td>
+</tr>
+{% empty %}
+<tr><td colspan="3">{% trans 'No themes' %}</td></tr>
+{% endfor %}

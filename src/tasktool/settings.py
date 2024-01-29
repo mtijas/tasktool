@@ -96,6 +96,7 @@ INSTALLED_APPS = [
     'apps.dashboard',
     'apps.task',
     'apps.tag',
+    'apps.agile',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,31 @@
+{% extends 'tasktool/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Epics' %}{% endblock %}
+
+{% block content %}
+
+{% include 'agile/snippets/menu.html' %}
+
+<main class="container">
+  <table role="grid">
+    <thead>
+      <tr>
+        <th>{% trans "Title" %}</th>
+        <th>{% trans "Description" %}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="epics-table" hx-get="{% url 'agile:epic:get-table' %}"  hx-trigger="newEpic from:body">
+      {% include 'agile/epic/table_rows.html' %}
+    </tbody>
+  </table>
+  <div id="epic-add">
+    <button hx-trigger="click" hx-get="{% url 'agile:epic:add' %}" hx-target="#modal" hx-swap="outerHTML">
+      {% trans 'Quick add a new epic' %}
+    </button>
+  </div>
+</main>
+
+{% endblock %}

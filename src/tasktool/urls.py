@@ -27,6 +27,7 @@ urlpatterns = [
     path('account/', include('apps.account.urls')),
     path('task/', include('apps.task.urls')),
     path('tag/', include('apps.tag.urls')),
+    path('agile/', include('apps.agile.urls')),
     path('', include('apps.dashboard.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),

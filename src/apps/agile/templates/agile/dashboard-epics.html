@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% for epic in theme.epic_set.all %}
+  <div>{{ epic.title }}</div>
+{% empty %}
+  <div>{% trans 'No epics' %}</div>
+{% endfor %}

@@ -1,0 +1,30 @@
+{% extends 'tasktool/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Stories' %}{% endblock %}
+
+{% block content %}
+
+{% include 'agile/snippets/menu.html' %}
+
+<main class="container">
+  <table role="grid">
+    <thead>
+      <tr>
+        <th>{% trans "Title" %}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="stories-table" hx-get="{% url 'agile:story:get-table' %}"  hx-trigger="newStory from:body">
+      {% include 'agile/story/table_rows.html' %}
+    </tbody>
+  </table>
+  <div id="story-add">
+    <button hx-trigger="click" hx-get="{% url 'agile:story:add' %}" hx-target="#modal" hx-swap="outerHTML">
+      {% trans 'Quick add a new story' %}
+    </button>
+  </div>
+</main>
+
+{% endblock %}

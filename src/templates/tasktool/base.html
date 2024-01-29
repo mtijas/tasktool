@@ -30,6 +30,11 @@
             </a>
           </li>
           <li>
+            <a class="{% active request 'agile' %}" href="{% url 'agile:dashboard' %}">
+              {% translate 'Agile' %}
+            </a>
+          </li>
+          <li>
             <a class="{% active request 'task' %}" href="{% url 'task:list' %}">
               {% translate 'Tasks' %}
             </a>

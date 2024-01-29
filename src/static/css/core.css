@@ -42,6 +42,15 @@
   --switch-checked-background-color: var(--primary);
 }
 
+
+/* Navigations */
+
+.active {
+  background-color: var(--primary-hover);
+  color: var(--primary-inverse);
+}
+
+
 article header li {
   padding-top: 0;
   padding-bottom: 0;
@@ -65,4 +74,29 @@ tr.htmx-swapping td {
   margin: .1rem .2rem .1rem 0;
   padding: .2rem .4rem;
   width: fit-content;
+}
+
+
+/* Agile */
+
+#agile-dashboard-container div {
+  border-radius: calc(var(--spacing) / 2);
+}
+
+.agile-dashboard-theme {
+  margin: var(--spacing);
+  background-color: #eef;
+  padding: var(--spacing);
+}
+
+.agile-dashboard-epics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.agile-dashboard-epics > * {
+  padding: 0.2em 0.5em;
+  background-color: #efe;
+  min-width: 10rem;
 }
