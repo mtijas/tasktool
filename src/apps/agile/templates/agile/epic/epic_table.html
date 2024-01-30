@@ -14,10 +14,11 @@
       <tr>
         <th>{% trans "Title" %}</th>
         <th>{% trans "Description" %}</th>
+        <th>{% trans "Themes" %}</th>
         <th></th>
       </tr>
     </thead>
-    <tbody id="epics-table" hx-get="{% url 'agile:epic:get-table' %}"  hx-trigger="newEpic from:body">
+    <tbody id="epics-table" hx-get="{% url 'agile:epic:get-table' %}"  hx-trigger="reloadAllEpics from:body">
       {% include 'agile/epic/table_rows.html' %}
     </tbody>
   </table>

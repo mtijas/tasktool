@@ -3,13 +3,14 @@
 {% for theme in themes %}
   <details class="agile-dashboard-theme">
     <summary>{{ theme.title }}</summary>
-    <p>{{ theme.description }}</p>
-    <div class="agile-dashboard-epics" hx-get="{% url 'agile:get-dashboard-epics' theme.id %}"  hx-trigger="newEpic from:body">
-      {% include 'agile/dashboard-epics.html' %}
+    <div>
+      {% if theme.description %}<p>{{ theme.description }}</p>{% endif %}
+      <div class="agile-dashboard-epics" hx-get="{% url 'agile:get-dashboard-epics' theme.id %}"  hx-trigger="reloadEpics-{{ theme.id }} from:body, load">
+      </div>
+      <a href="#" role="button" hx-trigger="click" hx-get="{% url 'agile:epic:add' theme.id %}" hx-target="#modal" hx-swap="outerHTML">
+        {% trans 'Quick add a new epic' %}
+      </a>
     </div>
-    <a href="#" role="button" hx-trigger="click" hx-get="{% url 'agile:epic:add' theme.id %}" hx-target="#modal" hx-swap="outerHTML">
-      {% trans 'Quick add a new epic' %}
-    </a>
   </details>
 {% empty %}
   <p>{% trans 'No themes' %}</p>

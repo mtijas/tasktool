@@ -84,8 +84,22 @@ tr.htmx-swapping td {
 }
 
 .agile-dashboard-theme {
-  margin: var(--spacing);
-  background-color: #eef;
+  margin: var(--spacing) 0;
+  border: solid 2px #eee;
+  padding: 0;
+}
+
+.agile-dashboard-theme > summary {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.agile-dashboard-theme > div {
+  padding: var(--spacing);
+}
+
+.agile-dashboard-theme > summary {
+  background-color: #eee;
   padding: var(--spacing);
 }
 
@@ -93,10 +107,31 @@ tr.htmx-swapping td {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
+  margin-bottom: .5rem;
 }
 
 .agile-dashboard-epics > * {
-  padding: 0.2em 0.5em;
-  background-color: #efe;
+  padding: 0;
+  background-color: rgb(245, 255, 245);
+  border: solid 2px rgb(189, 236, 197);
   min-width: 10rem;
+}
+
+.agile-dashboard-epics > div.no-epics {
+  background-color: #eee;
+  border: none;
+  min-width: none;
+}
+
+.agile-dashboard-epics > div > * {
+  padding: 0.2em 0.5em;
+}
+
+.agile-dashboard-epics > div > h5:first-child {
+  background-color: rgb(189, 236, 197);
+  margin-bottom: 0;
+}
+
+.agile-dashboard-epics > div > p:last-child {
+  margin-bottom: .2rem;
 }

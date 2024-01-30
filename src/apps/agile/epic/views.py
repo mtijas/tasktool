@@ -46,7 +46,10 @@ class EpicCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
             epic.themes.set(form.cleaned_data['themes'])
             epic.save()
             response = render(request, 'common/close_modal.html')
-            response['HX-Trigger'] = 'newEpic'
+            trigger_events = ['reloadAllEpics']
+            for theme in form.cleaned_data['themes']:
+                trigger_events.append(f'reloadEpics-{theme}')
+            response['HX-Trigger'] = ", ".join(trigger_events)
         else:
             response = render(request, 'agile/epic/quick_edit_form.html', {'form': form})
         return response
@@ -71,7 +74,7 @@ class EpicUpdateView(LoginRequiredMixin, PermissionRequiredMixin, View):
             epic.themes.set(form.cleaned_data['themes'])
             epic.save()
             response = render(request, 'common/close_modal.html')
-            response['HX-Trigger'] = 'newEpic'
+            response['HX-Trigger'] = 'reloadAllEpics'
             return response
         return render(request, 'agile/epic/quick_edit_form.html', {'form': form, 'epic': epic})
 
