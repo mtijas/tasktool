@@ -28,22 +28,24 @@
     </form>
     <footer>
       <div class="grid">
-        <button
-          role="button"
-          class="secondary"
-          onClick="closeModal(event)"
-        >
-          {% trans 'Cancel' %}
-        </button>
-        <button
-          role="button"
-          hx-post="{% if story %}{% url 'agile:story:edit' story.id %}{% else %}{% url 'agile:story:add' %}{% endif %}"
-          hx-include="#story-edit-form"
-          hx-swap="outerHTML"
-          hx-target="closest dialog"
-        >
-          {% trans 'Save story' %}
-        </button>
+        <div>
+          <button
+            class="secondary"
+            onClick="closeModal(event)"
+          >
+            {% trans 'Cancel' %}
+          </button>
+        </div>
+        <div>
+          <button
+            hx-post="{% if story %}{% url 'agile:story:edit' story.id %}{% else %}{% url 'agile:story:add' %}{% endif %}"
+            hx-include="#story-edit-form"
+            hx-swap="outerHTML"
+            hx-target="closest dialog"
+          >
+            {% trans 'Save story' %}
+          </button>
+        </div>
       </div>
     </footer>
   </article>

@@ -28,22 +28,24 @@
     </form>
     <footer>
       <div class="grid">
-        <button
-          role="button"
-          class="secondary"
-          onClick="closeModal(event)"
-        >
-          {% trans 'Cancel' %}
-        </button>
-        <button
-          role="button"
-          hx-post="{% if epic %}{% url 'agile:epic:edit' epic.id %}{% else %}{% url 'agile:epic:add' %}{% endif %}"
-          hx-include="#epic-edit-form"
-          hx-swap="outerHTML"
-          hx-target="closest dialog"
-        >
-          {% trans 'Save epic' %}
-        </button>
+        <div>
+          <button
+            class="secondary"
+            onClick="closeModal(event)"
+          >
+            {% trans 'Cancel' %}
+          </button>
+        </div>
+        <div>
+          <button
+            hx-post="{% if epic %}{% url 'agile:epic:edit' epic.id %}{% else %}{% url 'agile:epic:add' %}{% endif %}"
+            hx-include="#epic-edit-form"
+            hx-swap="outerHTML"
+            hx-target="closest dialog"
+          >
+            {% trans 'Save epic' %}
+          </button>
+        </div>
       </div>
     </footer>
   </article>

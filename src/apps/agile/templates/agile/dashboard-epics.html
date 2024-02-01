@@ -2,9 +2,24 @@
 
 {% for epic in epics %}
   <div>
-    <h5>{{ epic.title }}</h5>
-    {% if epic.description %}<p>{{ epic.description }}</p>{% endif %}
+    <details>
+      <summary><strong>{{ epic.title }}</strong></summary>
+      {% if epic.description %}
+        <details>
+          <summary>{{ epic.description|truncatechars:20 }}</summary>
+          <p>{{ epic.description }}</p>
+        </details>
+      {% endif %}
+      <div class="agile-dashboard-stories">
+        {% for story in epic.story_set.all %}
+          <div>{{ story.title }}</div>
+        {% empty %}
+          No stories
+        {% endfor %}
+      </div>
+    </details>
   </div>
-{% empty %}
-  <div class="no-epics"><p>{% trans 'No epics' %}</p></div>
 {% endfor %}
+<a href="#" role="button" hx-trigger="click" hx-get="{% url 'agile:epic:add' theme_id %}" hx-target="#modal" hx-swap="outerHTML">
+  +
+</a>

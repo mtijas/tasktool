@@ -1,11 +1,14 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from ..epic.models import Epic
+
 
 class Story(models.Model):
     title = models.TextField(
         verbose_name=_('title')
     )
+    epics = models.ManyToManyField(Epic)
 
 
     class Meta():

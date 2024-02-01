@@ -26,5 +26,5 @@ def get_dashboard_themes(request):
 @permission_required('agile.view_agile')
 def get_dashboard_epics(request, theme_id):
     epics = Epic.objects.filter(themes__id=theme_id).all()
-    return render(request, 'agile/dashboard-epics.html', {'epics': epics})
+    return render(request, 'agile/dashboard-epics.html', {'epics': epics, 'theme_id': theme_id})
 

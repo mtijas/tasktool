@@ -103,35 +103,54 @@ tr.htmx-swapping td {
   padding: var(--spacing);
 }
 
-.agile-dashboard-epics {
+.agile-dashboard-epics,
+.agile-dashboard-stories {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
   margin-bottom: .5rem;
+  align-items: flex-start;
+}
+
+.agile-dashboard-stories > div {
+  padding: .2em .5em;
+  background-color: aquamarine;
 }
 
 .agile-dashboard-epics > * {
-  padding: 0;
   background-color: rgb(245, 255, 245);
   border: solid 2px rgb(189, 236, 197);
-  min-width: 10rem;
 }
 
-.agile-dashboard-epics > div.no-epics {
+.agile-dashboard-epics > a {
+  background-color: rgb(223, 255, 229);
+  border: none;
+  color: rgb(46, 61, 48);
+}
+
+.agile-dashboard-epics > div > * {
+  padding: 0;
+}
+
+.agile-dashboard-epics > div > *.no-epics {
   background-color: #eee;
   border: none;
   min-width: none;
 }
 
-.agile-dashboard-epics > div > * {
-  padding: 0.2em 0.5em;
+.agile-dashboard-epics > div > * > * {
+  padding: .2em .5em;
 }
 
-.agile-dashboard-epics > div > h5:first-child {
-  background-color: rgb(189, 236, 197);
+.agile-dashboard-epics > div > * > *:last-child {
+  margin-bottom: .2rem;
+}
+
+.agile-dashboard-epics > div > * > *:first-child {
   margin-bottom: 0;
 }
 
-.agile-dashboard-epics > div > p:last-child {
-  margin-bottom: .2rem;
+.agile-dashboard-epics details {
+  margin-bottom: 0;
+  border: none;
 }

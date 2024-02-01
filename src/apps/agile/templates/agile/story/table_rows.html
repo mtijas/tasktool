@@ -3,6 +3,7 @@
 {% for story in stories %}
 <tr>
   <td>{{ story.title }}</td>
+  <td>{{ story.epics.all|join:', ' }}</td>
   <td>
     <a
       href="#"

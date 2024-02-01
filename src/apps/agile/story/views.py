@@ -9,6 +9,8 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
 
+from ..epic.models import Epic
+
 from .models import Story
 from .forms import StoryEditForm
 
@@ -27,15 +29,20 @@ def get_table(request):
 class StoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
     permission_required = 'story.add_story'
 
-    def get(self, request):
-        form = StoryEditForm(initial={'background_color': '#000000', 'text_color': '#ffffff'})
+    def get(self, request, epic_id=None):
+        epics = [(t.id, t.title) for t in Epic.objects.all()]
+        initial_epics = [epic_id]
+        form = StoryEditForm(initial={'epics': initial_epics}, epics=epics)
         return render(request, 'agile/story/quick_edit_form.html', {'form': form})
 
     def post(self, request):
-        form = StoryEditForm(request.POST)
+        epics = [(t.id, t.title) for t in Epic.objects.all()]
+        form = StoryEditForm(request.POST, epics=epics)
         if form.is_valid():
             story = Story()
             story.title = form.cleaned_data['title']
+            story.save()
+            story.epics.set(form.cleaned_data['epics'])
             story.save()
             response = render(request, 'common/close_modal.html')
             response['HX-Trigger'] = 'newStory'
@@ -48,14 +55,18 @@ class StoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     def get(self, request, story_id):
         story = get_object_or_404(Story, pk=story_id)
-        form = StoryEditForm(initial={'title': story.title})
+        epics = [(t.id, t.title) for t in Epic.objects.all()]
+        initial_epics = [t.id for t in story.epics.all()]
+        form = StoryEditForm(initial={'title': story.title, 'epics': initial_epics}, epics=epics)
         return render(request, 'agile/story/quick_edit_form.html', {'form': form, 'story': story})
 
     def post(self, request, story_id):
         story = get_object_or_404(Story, pk=story_id)
-        form = StoryEditForm(request.POST)
+        epics = [(t.id, t.title) for t in Epic.objects.all()]
+        form = StoryEditForm(request.POST, epics=epics)
         if form.is_valid():
             story.title = form.cleaned_data['title']
+            story.epics.set(form.cleaned_data['epics'])
             story.save()
             response = render(request, 'common/close_modal.html')
             response['HX-Trigger'] = 'newStory'
