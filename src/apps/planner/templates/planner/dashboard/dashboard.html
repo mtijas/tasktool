@@ -1,0 +1,20 @@
+{% extends 'tasktool/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'planner' %}{% endblock %}
+
+{% block content %}
+
+{% include 'planner/snippets/menu.html' %}
+
+<main class="container">
+  <div id="planner-dashboard-container" hx-get="{% url 'planner:dashboard:get-dashboard-themes' %}"  hx-trigger="newTheme from:body">
+    {% include 'planner/dashboard/dashboard-themes.html' %}
+  </div>
+  <button hx-trigger="click" hx-get="{% url 'planner:theme:add' %}" hx-target="#modal" hx-swap="outerHTML">
+    {% trans 'Quick add a new theme' %}
+  </button>
+</main>
+
+{% endblock %}

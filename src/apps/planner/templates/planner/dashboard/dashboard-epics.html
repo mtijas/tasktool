@@ -1,0 +1,25 @@
+{% load i18n %}
+
+{% for epic in theme.epics.all %}
+  <div>
+    <details>
+      <summary><strong>{{ epic.title }}</strong></summary>
+      {% if epic.description %}
+        <details>
+          <summary>{{ epic.description|truncatechars:20 }}</summary>
+          <p>{{ epic.description }}</p>
+        </details>
+      {% endif %}
+      <div class="planner-dashboard-stories">
+        {% for story in epic.stories.all %}
+          <div>{{ story.title }}</div>
+        {% empty %}
+          No stories
+        {% endfor %}
+      </div>
+    </details>
+  </div>
+{% endfor %}
+<a href="#" role="button" hx-trigger="click" hx-get="{% url 'planner:epic:add' theme.id %}" hx-target="#modal" hx-swap="outerHTML">
+  +
+</a>

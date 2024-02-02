@@ -1,0 +1,12 @@
+{% load i18n tasktool_extras %}
+
+<header class="container">
+  <nav>
+    <ul>
+      <li><a class="{% active request 'planner' True %}" href="{% url 'planner:dashboard:dashboard' %}">{% trans 'Dashboard' %}</a></li>
+      <li><a class="{% active request 'planner/theme' %}" href="{% url 'planner:theme:list' %}">{% trans 'Themes' %}</a></li>
+      <li><a class="{% active request 'planner/epic' %}" href="{% url 'planner:epic:list' %}">{% trans 'Epics' %}</a></li>
+      <li><a class="{% active request 'planner/story' %}" href="{% url 'planner:story:list' %}">{% trans 'Stories' %}</a></li>
+    </ul>
+  </nav>
+</header>

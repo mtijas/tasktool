@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% for theme in themes %}
+  <details class="planner-dashboard-theme" open>
+    <summary>{{ theme.title }}</summary>
+    <div>
+      {% if theme.description %}
+        <details>
+          <summary>{{ theme.description|truncatewords:6 }}</summary>
+          <p>{{ theme.description }}</p>
+        </details>
+      {% endif %}
+      <div class="planner-dashboard-epics" hx-get="{% url 'planner:dashboard:get-dashboard-epics' theme.id %}"  hx-trigger="reloadEpics-{{ theme.id }} from:body, load">
+      </div>
+    </div>
+  </details>
+{% empty %}
+  <p>{% trans 'No themes' %}</p>
+{% endfor %}

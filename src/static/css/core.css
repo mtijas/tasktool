@@ -77,34 +77,34 @@ tr.htmx-swapping td {
 }
 
 
-/* Agile */
+/* planner */
 
-#agile-dashboard-container div {
+#planner-dashboard-container div {
   border-radius: calc(var(--spacing) / 2);
 }
 
-.agile-dashboard-theme {
+.planner-dashboard-theme {
   margin: var(--spacing) 0;
   border: solid 2px #eee;
   padding: 0;
 }
 
-.agile-dashboard-theme > summary {
+.planner-dashboard-theme > summary {
   font-size: 1.2em;
   font-weight: bold;
 }
 
-.agile-dashboard-theme > div {
+.planner-dashboard-theme > div {
   padding: var(--spacing);
 }
 
-.agile-dashboard-theme > summary {
+.planner-dashboard-theme > summary {
   background-color: #eee;
   padding: var(--spacing);
 }
 
-.agile-dashboard-epics,
-.agile-dashboard-stories {
+.planner-dashboard-epics,
+.planner-dashboard-stories {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
@@ -112,45 +112,45 @@ tr.htmx-swapping td {
   align-items: flex-start;
 }
 
-.agile-dashboard-stories > div {
+.planner-dashboard-stories > div {
   padding: .2em .5em;
   background-color: aquamarine;
 }
 
-.agile-dashboard-epics > * {
+.planner-dashboard-epics > * {
   background-color: rgb(245, 255, 245);
   border: solid 2px rgb(189, 236, 197);
 }
 
-.agile-dashboard-epics > a {
+.planner-dashboard-epics > a {
   background-color: rgb(223, 255, 229);
   border: none;
   color: rgb(46, 61, 48);
 }
 
-.agile-dashboard-epics > div > * {
+.planner-dashboard-epics > div > * {
   padding: 0;
 }
 
-.agile-dashboard-epics > div > *.no-epics {
+.planner-dashboard-epics > div > *.no-epics {
   background-color: #eee;
   border: none;
   min-width: none;
 }
 
-.agile-dashboard-epics > div > * > * {
+.planner-dashboard-epics > div > * > * {
   padding: .2em .5em;
 }
 
-.agile-dashboard-epics > div > * > *:last-child {
+.planner-dashboard-epics > div > * > *:last-child {
   margin-bottom: .2rem;
 }
 
-.agile-dashboard-epics > div > * > *:first-child {
+.planner-dashboard-epics > div > * > *:first-child {
   margin-bottom: 0;
 }
 
-.agile-dashboard-epics details {
+.planner-dashboard-epics details {
   margin-bottom: 0;
   border: none;
 }
