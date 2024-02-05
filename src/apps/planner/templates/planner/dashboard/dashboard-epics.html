@@ -2,20 +2,17 @@
 
 {% for epic in theme.epics.all %}
   <div>
-    <details>
+    <details open>
       <summary><strong>{{ epic.title }}</strong></summary>
       {% if epic.description %}
-        <details>
-          <summary>{{ epic.description|truncatechars:20 }}</summary>
-          <p>{{ epic.description }}</p>
-        </details>
+        <div>
+          <details>
+            <summary>{% trans 'Description' %}</summary>
+            <p>{{ epic.description }}</p>
+          </details>
+        </div>
       {% endif %}
-      <div class="planner-dashboard-stories">
-        {% for story in epic.stories.all %}
-          <div>{{ story.title }}</div>
-        {% empty %}
-          No stories
-        {% endfor %}
+      <div hx-get="{% url 'planner:dashboard:get-dashboard-stories' epic.id %}"  hx-trigger="reloadStories-{{ epic.id }} from:body, load">
       </div>
     </details>
   </div>

@@ -44,7 +44,10 @@ class StoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
             for epic_id in form.cleaned_data['epics']:
                 story.epic_set.add(epic_id)
             response = render(request, 'common/close_modal.html')
-            response['HX-Trigger'] = 'newStory'
+            trigger_events = ['reloadAllEpics']
+            for epic in form.cleaned_data['epics']:
+                trigger_events.append(f'reloadStories-{epic}')
+            response['HX-Trigger'] = ", ".join(trigger_events)
         else:
             response = render(request, 'planner/story/quick_edit_form.html', {'form': form})
         return response

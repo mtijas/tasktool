@@ -6,7 +6,7 @@
     <div>
       {% if theme.description %}
         <details>
-          <summary>{{ theme.description|truncatewords:6 }}</summary>
+          <summary>{% trans 'Description' %}</summary>
           <p>{{ theme.description }}</p>
         </details>
       {% endif %}

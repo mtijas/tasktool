@@ -2,6 +2,7 @@
   --spacing: .5rem;
   --form-element-spacing-vertical: .1rem;
   --form-element-spacing-horizontal: .3rem;
+  --font-family: 'Titillium Web', sans-serif;
 }
 
 /* Deep-orange Light scheme (Default) */
@@ -108,13 +109,19 @@ tr.htmx-swapping td {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
-  margin-bottom: .5rem;
+  margin-bottom: none;
   align-items: flex-start;
 }
 
-.planner-dashboard-stories > div {
+.planner-dashboard-stories > * {
   padding: .2em .5em;
-  background-color: aquamarine;
+  background-color: rgb(36, 241, 207);
+}
+
+.planner-dashboard-stories > a {
+  background-color: rgb(189, 253, 242);
+  border: none;
+  color: rgb(46, 61, 48);
 }
 
 .planner-dashboard-epics > * {
@@ -153,4 +160,5 @@ tr.htmx-swapping td {
 .planner-dashboard-epics details {
   margin-bottom: 0;
   border: none;
+  padding: 0;
 }
