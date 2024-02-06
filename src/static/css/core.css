@@ -80,7 +80,8 @@ tr.htmx-swapping td {
 
 /* planner */
 
-#planner-dashboard-container div {
+#planner-dashboard-container div,
+#planner-dashboard-container details {
   border-radius: calc(var(--spacing) / 2);
 }
 
@@ -118,47 +119,48 @@ tr.htmx-swapping td {
   background-color: rgb(36, 241, 207);
 }
 
+.planner-dashboard-stories a {
+  color: rgb(46, 61, 48);
+}
+
 .planner-dashboard-stories > a {
   background-color: rgb(189, 253, 242);
   border: none;
   color: rgb(46, 61, 48);
 }
 
-.planner-dashboard-epics > * {
-  background-color: rgb(245, 255, 245);
+.planner-dashboard-epics > details {
+  background-color: rgb(246, 255, 246);
   border: solid 2px rgb(189, 236, 197);
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.planner-dashboard-epics a {
+  color: rgb(46, 61, 48);
 }
 
 .planner-dashboard-epics > a {
   background-color: rgb(223, 255, 229);
   border: none;
   color: rgb(46, 61, 48);
+  padding: .2em .5em;
 }
 
-.planner-dashboard-epics > div > * {
-  padding: 0;
-}
-
-.planner-dashboard-epics > div > *.no-epics {
+.planner-dashboard-epics > details.no-epics {
   background-color: #eee;
   border: none;
   min-width: none;
 }
 
-.planner-dashboard-epics > div > * > * {
+.planner-dashboard-epics > * > * {
   padding: .2em .5em;
 }
 
-.planner-dashboard-epics > div > * > *:last-child {
+.planner-dashboard-epics > * > *:last-child {
   margin-bottom: .2rem;
 }
 
-.planner-dashboard-epics > div > * > *:first-child {
+.planner-dashboard-epics > * > *:first-child {
   margin-bottom: 0;
-}
-
-.planner-dashboard-epics details {
-  margin-bottom: 0;
-  border: none;
-  padding: 0;
 }

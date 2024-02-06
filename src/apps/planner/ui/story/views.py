@@ -25,6 +25,12 @@ def get_table(request):
     stories = Story.objects.order_by('title')
     return render(request, 'planner/story/table_rows.html', {'stories': stories})
 
+@login_required
+@permission_required('story.view_story')
+def view_story(request, story_id):
+    story = get_object_or_404(Story, pk=story_id)
+    return render(request, 'planner/story/detailed.html', {'story': story})
+
 class StoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, View):
     permission_required = 'story.add_story'
 

@@ -1,21 +1,11 @@
 {% load i18n %}
 
 {% for epic in theme.epics.all %}
-  <div>
-    <details open>
-      <summary><strong>{{ epic.title }}</strong></summary>
-      {% if epic.description %}
-        <div>
-          <details>
-            <summary>{% trans 'Description' %}</summary>
-            <p>{{ epic.description }}</p>
-          </details>
-        </div>
-      {% endif %}
-      <div hx-get="{% url 'planner:dashboard:get-dashboard-stories' epic.id %}"  hx-trigger="reloadStories-{{ epic.id }} from:body, load">
-      </div>
-    </details>
-  </div>
+  <details open>
+    <summary><strong>{{ epic.title }}</strong></summary>
+    <div hx-get="{% url 'planner:dashboard:get-dashboard-stories' epic.id %}"  hx-trigger="reloadStories-{{ epic.id }} from:body, load">
+    </div>
+  </details>
 {% endfor %}
 <a href="#" role="button" hx-trigger="click" hx-get="{% url 'planner:epic:add' theme.id %}" hx-target="#modal" hx-swap="outerHTML">
   +

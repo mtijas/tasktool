@@ -1,0 +1,31 @@
+{% load i18n %}
+
+<dialog id="modal" open="true">
+  <article>
+    <header>
+      <a href="#close"
+        aria-label="Close"
+        class="close"
+        onClick="closeModal(event)">
+      </a>
+      <p>
+        <strong>
+          {{ story.title }}
+        </strong>
+      </p>
+    </header>
+    <p>Epics: {{ story.epic_set.all|join:', ' }}</p>
+    <footer>
+      <div class="grid">
+        <div>
+          <button
+            class="secondary"
+            onClick="closeModal(event)"
+          >
+            {% trans 'Close' %}
+          </button>
+        </div>
+      </div>
+    </footer>
+  </article>
+</dialog>

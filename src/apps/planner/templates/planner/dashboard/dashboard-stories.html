@@ -1,13 +1,14 @@
 {% load i18n %}
 
-<details open>
-  <summary>{% trans 'Stories' %}</summary>
-  <div class="planner-dashboard-stories">
-    {% for story in epic.stories.all %}
-      <div class="story">{{ story.title }}</div>
-    {% endfor %}
-    <a href="#" role="button" hx-trigger="click" hx-get="{% url 'planner:story:add' epic.id %}" hx-target="#modal" hx-swap="outerHTML">
-      +
-    </a>
-  </div>
-</details>
+<div class="planner-dashboard-stories">
+  {% for story in epic.stories.all %}
+    <div class="story">
+      <a href="#" hx-trigger="click" hx-get="{% url 'planner:story:view' story.id %}" hx-target="#modal" hx-swap="outerHTML">
+        {{ story.title }}
+      </a>
+    </div>
+  {% endfor %}
+  <a href="#" role="button" hx-trigger="click" hx-get="{% url 'planner:story:add' epic.id %}" hx-target="#modal" hx-swap="outerHTML">
+    +
+  </a>
+</div>
